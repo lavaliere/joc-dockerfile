@@ -1,6 +1,11 @@
-FROM apemberton/jenkins-operations-center
+FROM lavaliere/jenkins-base
 
 MAINTAINER Tracy Kennedy
+
+# Download jenkins-oc.war
+USER jenkins
+WORKDIR /usr/lib/jenkins
+RUN curl -L -O -w "Downloaded: %{url_effective}\\n" "http://jenkins-updates.cloudbees.com/download/oc/*latest*/jenkins-oc.war"
 
 USER root
 RUN apt-get update && apt-get -y upgrade
